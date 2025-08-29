@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-
+import os
 app = Flask(__name__)
 
 # ----- Serve Frontend -----
@@ -73,4 +73,7 @@ def bfhl():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Bind to 0.0.0.0 and use the PORT from Render (or default to 5000 locally)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
